@@ -1,0 +1,6 @@
+{
+  "name": "BTRT Awards Portal",
+  "description": "Internal employee recognition, HOD review, and judge scoring portal for the BTRT Awards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

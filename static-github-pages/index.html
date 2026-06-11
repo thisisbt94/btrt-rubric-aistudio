@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTRT Awards 2026 Nomination Portal</title>
+  <!-- Beautiful Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Interactive Tailwind CSS CDN for pristine high-fidelity styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- TOP HEADER -->
+  <header class="bg-slate-950 text-white border-b border-slate-800 shadow-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-amber-500 p-2 rounded-xl text-slate-950 shadow">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+        </div>
+        <div>
+          <span class="text-[10px] tracking-widest text-[#f59e0b] font-semibold block uppercase">YTL Group Internal Excellence</span>
+          <h1 class="text-lg font-bold font-display text-slate-100 leading-none mt-0.5">BTRT Awards 2026</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <div id="unlockedBadge" class="hidden flex items-center gap-1.5 bg-emerald-950/80 text-emerald-400 text-xs font-semibold px-3 py-1.5 rounded-xl border border-emerald-900">
+          <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+          <span>Reviewer Active</span>
+        </div>
+        <button id="authBtn" class="bg-slate-900 border border-slate-800 hover:border-amber-500 transition-all text-slate-200 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span id="authBtnText">Reviewer Access</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TABS BAR -->
+    <div class="bg-slate-900 border-t border-slate-800/80 px-4">
+      <div class="max-w-7xl mx-auto flex gap-2 overflow-x-auto py-2 no-scrollbar">
+        <button onclick="switchTab('landing')" class="tab-btn px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-amber-500 bg-slate-950" id="tab-landing">Overview</button>
+        <button onclick="switchTab('nominate')" class="tab-btn px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800/55" id="tab-nominate">Submit Nomination</button>
+        <button onclick="switchTab('review')" class="tab-btn px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800/55 flex items-center gap-1.5" id="tab-review">
+          <svg class="w-3.5 h-3.5 lock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Review Workspace
+        </button>
+        <button onclick="switchTab('judge')" class="tab-btn px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800/55 flex items-center gap-1.5" id="tab-judge">
+          <svg class="w-3.5 h-3.5 lock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Judge Scoring
+        </button>
+        <button onclick="switchTab('rankings')" class="tab-btn px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800/55 flex items-center gap-1.5" id="tab-rankings">
+          <svg class="w-3.5 h-3.5 lock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Leaderboard Rankings
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROCESS GRAPHICAL STATS -->
+  <section class="bg-slate-900 border-b border-slate-800 py-6 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="p-3 bg-slate-800/90 rounded-xl border border-amber-500 shadow-sm" id="pstep-1">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="w-5 h-5 bg-amber-500 text-slate-950 rounded-full flex items-center justify-center text-xs font-bold font-mono">1</span>
+            <span class="text-xs font-bold uppercase tracking-wider block">Peer Nomination</span>
+          </div>
+          <span class="text-[10px] text-slate-400 block leading-tight">STAR story & evidence</span>
+        </div>
+        <div class="p-3 bg-slate-950/30 rounded-xl border border-slate-850" id="pstep-2">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="w-5 h-5 bg-slate-800 text-slate-450 rounded-full flex items-center justify-center text-xs font-bold font-mono">2</span>
+            <span class="text-xs font-bold uppercase tracking-wider block">HR / HOD Review</span>
+          </div>
+          <span class="text-[10px] text-slate-450 block leading-tight">Eligibility verification</span>
+        </div>
+        <div class="p-3 bg-slate-950/30 rounded-xl border border-slate-850" id="pstep-3">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="w-5 h-5 bg-slate-800 text-slate-455 rounded-full flex items-center justify-center text-xs font-bold font-mono">3</span>
+            <span class="text-xs font-bold uppercase tracking-wider block">Director Shortlist</span>
+          </div>
+          <span class="text-[10px] text-slate-450 block leading-tight">BU Head approval</span>
+        </div>
+        <div class="p-3 bg-slate-950/30 rounded-xl border border-slate-850" id="pstep-4">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="w-5 h-5 bg-slate-800 text-slate-460 rounded-full flex items-center justify-center text-xs font-bold font-mono">4</span>
+            <span class="text-xs font-bold uppercase tracking-wider block">Judging Panel</span>
+          </div>
+          <span class="text-[10px] text-slate-450 block leading-tight">Standardized rubric</span>
+        </div>
+        <div class="p-3 bg-slate-950/30 rounded-xl border border-slate-850" id="pstep-5">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="w-5 h-5 bg-slate-800 text-slate-465 rounded-full flex items-center justify-center text-xs font-bold font-mono">5</span>
+            <span class="text-xs font-bold uppercase tracking-wider block">Award Showcase</span>
+          </div>
+          <span class="text-[10px] text-slate-450 block leading-tight">Official winners selected</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSPACE PANEL INDICATOR FOR REVIEWERS -->
+  <section id="reviewerBar" class="hidden bg-slate-100 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap justify-between items-center gap-4">
+      <span class="text-xs font-bold text-slate-500 uppercase">Interactive Reviewer Dashboard Toolbar</span>
+      <div class="flex gap-4">
+        <div class="bg-white px-3 py-1 border rounded-lg text-xs font-semibold text-slate-650 shadow-sm flex items-center gap-1.5">
+          <span>Nominations total:</span>
+          <span id="kpiTotal" class="text-slate-900 font-bold">0</span>
+        </div>
+        <div class="bg-white px-3 py-1 border rounded-lg text-xs font-semibold text-slate-650 shadow-sm flex items-center gap-1.5">
+          <span class="text-amber-750">Finalists:</span>
+          <span id="kpiFinalists" class="text-amber-700 font-bold">0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+
+    <!-- 1. LANDING PANEL -->
+    <div id="panel-landing" class="tab-panel flex flex-col md:flex-row gap-8 items-start">
+      <div class="flex-1 space-y-6">
+        <div class="bg-white border rounded-2xl p-6 sm:p-8 shadow-sm">
+          <span class="inline-block bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+            BTRT Awards Portal V5
+          </span>
+          <h2 class="text-3xl font-display font-bold text-slate-900 tracking-tight leading-none mb-3">
+            Honouring Extraordinary Effort and Core YTL Values
+          </h2>
+          <p class="text-slate-600 leading-relaxed text-base">
+            This internal portal manages the lifecycle of the employee performance awards program. 
+            We empower employees to nominate peers, and guide managers and judges through strict, fair evaluations.
+          </p>
+
+          <div class="bg-slate-50 border p-4 rounded-xl flex items-start gap-3 mt-6">
+            <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              <strong>Positioning:</strong> Rest assured this is a checked, verified program. 
+              The peer narrative requires quantitative physical data (S.T.A.R evidence), and every nominee 
+              undergoes absolute HR confirmation before the finals.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 mt-8">
+            <button onclick="switchTab('nominate')" class="bg-slate-950 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl shadow transition-all active:scale-95">
+              Submit Nomination
+            </button>
+            <button id="ctaReviewBtn" class="border border-slate-300 hover:bg-slate-50 text-slate-705 font-bold px-6 py-3 rounded-xl transition-all active:scale-95">
+              Reviewer Login
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-80 bg-slate-950 text-white rounded-2xl p-6 shadow-lg space-y-4">
+        <h3 class="font-bold text-sm tracking-widest text-[#f59e0b] uppercase">Interactive Simulator Console</h3>
+        <p class="text-xs text-slate-400">
+          Drop in mock cases and score final candidate rankings entirely inside this screen.
+        </p>
+        <div class="space-y-2 pt-2">
+          <button onclick="seedDemoData()" class="w-full bg-white hover:bg-slate-100 text-slate-900 py-2.5 rounded-xl text-xs font-bold text-center block shadow transition-all active:scale-95">
+            Reset 8 High-Fidelity Demo Cases
+          </button>
+          <button onclick="clearAllData()" class="w-full bg-slate-900 hover:bg-slate-800 text-slate-300 py-2.5 rounded-xl text-xs font-semibold text-center block border border-slate-800">
+            Clear Browser Storage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. NOMINATION FORM PANEL -->
+    <div id="panel-nominate" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-white border rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="flex justify-between items-start gap-4 flex-wrap mb-4">
+          <div>
+            <h2 class="text-2xl font-bold font-display text-slate-900">New Peer Nomination Form</h2>
+            <p class="text-xs text-slate-500 mt-1">Fields marked with an asterisk (*) are strictly required.</p>
+          </div>
+          <button onclick="fillSampleNomination()" class="bg-amber-100/90 text-amber-800 hover:bg-amber-100 border border-amber-250 hover:border-amber-400 transition-colors px-4 py-2 rounded-xl text-xs font-bold">
+            ⚡ Pre-fill Form with STAR Sample
+          </button>
+        </div>
+
+        <form id="nomForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+          
+          <!-- PART A: NOMINATOR PROFILE -->
+          <div class="bg-slate-50/70 border rounded-xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider block border-b border-slate-200 pb-2">A. Nominator Information (Your Profile)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Your Full Name *</label>
+                <input type="text" id="nom_name" required placeholder="e.g. Asha Lee" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Your Work Email *</label>
+                <input type="email" id="nom_email" required placeholder="name@ytl.com.my" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Your Company / Business Unit *</label>
+                <input type="text" id="nom_company" required placeholder="e.g. YTL Hotels" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Relationship to Nominee *</label>
+                <select id="nom_relationship" required class="w-full bg-white border rounded-xl px-3 py-2.5 text-sm">
+                  <option value="">Select Professional Relationship</option>
+                  <option>Peer / colleague (Direct observation)</option>
+                  <option>Direct Manager / Supervisor</option>
+                  <option>HOD / Functional Head</option>
+                  <option>Cross-company collaborator</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- PART B: NOMINEE PROFILE -->
+          <div class="bg-slate-50/70 border rounded-xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider block border-b border-slate-200 pb-2">B. Nominee Profile (The Colleague You Appreciate)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Nominee Full Name *</label>
+                <input type="text" id="nominee_name" required placeholder="Their full official name" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Nominee Work Email</label>
+                <input type="email" id="nominee_email" placeholder="nominee@ytl.com.my" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Nominee Subsidiary / BU *</label>
+                <input type="text" id="nominee_company" required placeholder="e.g. YES 5G, YTL Power" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Nominee Department / Function *</label>
+                <input type="text" id="nominee_department" required placeholder="e.g. IT Operations, Marketing" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Designation / Job Title </label>
+                <input type="text" id="nominee_title" placeholder="e.g. Executive, RF Specialist" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-600 block mb-1">Work Location / Country</label>
+                <input type="text" id="nominee_location" placeholder="e.g. KL, Malaysia" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- PART C: VALUES & CATEGORY -->
+          <div class="bg-slate-50/70 border rounded-xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider block border-b border-slate-200 pb-2">C. Target Award Category & Demonstrated YTL Core Values</h3>
+            <div>
+              <label class="text-xs font-bold text-slate-700 block mb-1">Select Award Category *</label>
+              <select id="award_category" required class="w-full bg-white border rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700">
+                <option>BTRT Peak Performer of the Year</option>
+                <option>YTL Core Values Ambassador</option>
+                <option>Cross-boundary Collaboration Award</option>
+                <option>Unsung Hero Recognition</option>
+                <option>Rising Star (Outstanding New Joiner)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-slate-700 block mb-2">Demonstrated Core Values (Select at least one) *</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="p-3 bg-white border rounded-xl flex items-start gap-2.5 cursor-pointer selection:bg-transparent">
+                  <input type="checkbox" name="values" value="Hard Work" class="mt-1">
+                  <div>
+                    <span class="text-xs font-bold block text-slate-805">Hard Work</span>
+                    <span class="text-[10px] text-slate-450 block leading-tight">Persevering to achieve high operational delivery.</span>
+                  </div>
+                </label>
+                <label class="p-3 bg-white border rounded-xl flex items-start gap-2.5 cursor-pointer selection:bg-transparent">
+                  <input type="checkbox" name="values" value="Honesty" class="mt-1">
+                  <div>
+                    <span class="text-xs font-bold block text-slate-805">Honesty</span>
+                    <span class="text-[10px] text-slate-450 block leading-tight">Meticulous transparency and peer trustworthiness.</span>
+                  </div>
+                </label>
+                <label class="p-3 bg-white border rounded-xl flex items-start gap-2.5 cursor-pointer selection:bg-transparent">
+                  <input type="checkbox" name="values" value="Moral Responsibility" class="mt-1">
+                  <div>
+                    <span class="text-xs font-bold block text-slate-805">Moral Responsibility</span>
+                    <span class="text-[10px] text-slate-450 block leading-tight">Caring for society and strict code of ethics.</span>
+                  </div>
+                </label>
+                <label class="p-3 bg-white border rounded-xl flex items-start gap-2.5 cursor-pointer selection:bg-transparent">
+                  <input type="checkbox" name="values" value="Togetherness" class="mt-1">
+                  <div>
+                    <span class="text-xs font-bold block text-slate-805">Togetherness</span>
+                    <span class="text-[10px] text-slate-450 block leading-tight">Synergizing as one cross-subsidiary corporate team.</span>
+                  </div>
+                </label>
+                <label class="p-3 bg-white border rounded-xl flex items-start gap-2.5 cursor-pointer selection:bg-transparent">
+                  <input type="checkbox" name="values" value="Vitality" class="mt-1">
+                  <div>
+                    <span class="text-xs font-bold block text-slate-805">Vitality</span>
+                    <span class="text-[10px] text-slate-450 block leading-tight">Bringing proactively positive forward thinking.</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- PART D: STAR FORMAT EVIDENCE -->
+          <div class="bg-slate-50/70 border rounded-xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider block border-b border-slate-200 pb-2">D. S.T.A.R Blueprint Case Formulation</h3>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">S — Situation description * (Challenge or Incident faced)</label>
+                <textarea id="case_s" required rows="2" placeholder="What technical challenge, SLA threat, or customer issue emerged?" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">T — Task assigned * (What was expected or mandated)</label>
+                <textarea id="case_t" required rows="2" placeholder="What was the deadline, SLA window, or individual expectation?" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">A — Action accomplished * (Detailed individual effort)</label>
+                <textarea id="case_a" required rows="3" placeholder="What exact manual steps, diagnostic software drafts, or long hours did they commit?" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">R — Result * (Tangible output data or customer/financial savings)</label>
+                <textarea id="case_r" required rows="2" placeholder="What actual saving, restored SLA, or team percentage boost emerged?" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">Why do they specifically deserve group-wide award recognition? *</label>
+                <textarea id="case_worthiness" required rows="2" placeholder="Summarize their performance leadership..." class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-700 block mb-1">Optional Reference Proof / Link</label>
+                <input type="text" id="case_evidenceLink" placeholder="e.g. Appraisals shared path, KPI log OneDrive link" class="w-full bg-white border rounded-xl px-4 py-2.5 text-sm">
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBMISSION BOUNDS -->
+          <div class="space-y-4 pt-2">
+            <label class="flex items-start gap-2 cursor-pointer select-none">
+              <input type="checkbox" id="form_consent" required class="mt-1">
+              <span class="text-xs text-slate-500 leading-normal font-semibold">I confirm this narrative details actual events and is subject to departmental head audit before finalists vetting.</span>
+            </label>
+
+            <div class="flex items-center gap-3">
+              <button type="submit" class="bg-slate-950 hover:bg-slate-800 text-white font-bold px-8 py-3 rounded-xl transition-all active:scale-95 shadow">
+                Submit Nomination Card
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. REVIEWER LIST AND SUMMARY PANEL -->
+    <div id="panel-review" class="tab-panel hidden space-y-6">
+      <div class="bg-white border rounded-2xl p-5 shadow-sm space-y-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 font-display">Active Nomination Screening</h2>
+          <p class="text-xs text-slate-500">Filter, search, or update candidates. Real-time updates save to browser localCache.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+          <input type="text" id="searchBox" placeholder="Search nominee, nominator or ID" class="w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm" oninput="renderReviewList()">
+          <select id="statusSelect" class="w-full bg-slate-50 border rounded-xl px-3 py-2.5 text-sm font-semibold" onchange="renderReviewList()">
+            <option value="All">All Statuses</option>
+            <option>Peer Submitted</option>
+            <option>HR / HOD Review</option>
+            <option>More Info Needed</option>
+            <option>Director Endorsed</option>
+            <option>Finalist</option>
+            <option>Not Shortlisted</option>
+          </select>
+          <select id="companySelect" class="w-full bg-slate-50 border rounded-xl px-3 py-2.5 text-sm font-semibold" onchange="renderReviewList()">
+            <option value="All">All Subsidiaries</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Listing target -->
+      <div id="reviewCardsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- populated from JS -->
+      </div>
+    </div>
+
+    <!-- 4. JUDGES MATRIX PANEL -->
+    <div id="panel-judge" class="tab-panel hidden space-y-6">
+      <div class="bg-slate-900 rounded-2xl p-6 text-white shadow">
+        <h2 class="text-xl font-bold font-display text-slate-100 mb-1">Director Scoring Board</h2>
+        <p class="text-xs text-slate-300 max-w-xl leading-relaxed">
+          Select standard scores (1-5) across evaluation guidelines for finalized nominee shortlists.
+        </p>
+        <div class="flex items-center gap-2 mt-4 text-xs font-semibold">
+          <span>Switched Judge As:</span>
+          <select id="judgeContext" class="bg-slate-800 text-amber-400 border border-slate-700 px-3 py-1.5 rounded-xl" onchange="renderJudgeList()">
+            <option>Judge 01</option>
+            <option>Judge 02</option>
+            <option>Judge 03</option>
+            <option>Director of Talent</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="judgeCardsList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- populated dynamically from JS -->
+      </div>
+    </div>
+
+    <!-- 5. RANKINGS LEADERBOARD PANEL -->
+    <div id="panel-rankings" class="tab-panel hidden space-y-6">
+      <div class="bg-white border rounded-2xl p-6 shadow-sm">
+        <h2 class="text-2xl font-bold font-display text-slate-900 mb-1">Shortlist Rankings Leaderboard</h2>
+        <p class="text-xs text-slate-550 leading-relaxed mb-6">
+          Real-time placement is determined dynamically from calculations across the 5 evaluation criteria star weightages.
+        </p>
+
+        <div class="border rounded-xl overflow-hidden shadow-inner overflow-x-auto">
+          <table class="w-full border-collapse text-left text-sm min-w-[650px]">
+            <thead class="bg-slate-950 text-slate-100">
+              <tr>
+                <th class="p-4 text-xs font-bold uppercase font-mono text-center w-16">Rank</th>
+                <th class="p-4 text-xs font-bold uppercase">Nominee & ID</th>
+                <th class="p-4 text-xs font-bold uppercase">Company BU</th>
+                <th class="p-4 text-xs font-bold uppercase">Values Shown</th>
+                <th class="p-4 text-xs font-bold uppercase text-center">Score Average</th>
+                <th class="p-4 text-xs font-bold uppercase text-center w-28">Score Count</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody" class="divide-y divide-slate-200">
+              <!-- filled dynamically in JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SSO LOGIN PASSCODE MODAL -->
+  <div id="loginModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border rounded-2xl shadow-xl p-6 max-w-sm w-full space-y-4">
+      <h3 class="text-lg font-bold font-display text-slate-900">Passcode Gate Lock</h3>
+      <p class="text-xs text-slate-500 leading-normal">
+        Use official demonstration code BTRT2026 to verify reviewer dashboard functionality.
+      </p>
+      
+      <form onsubmit="handlePasscodeSubmit(event)" class="space-y-3">
+        <input type="password" id="passCodeField" placeholder="Enter BTRT2026" class="w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-center font-bold tracking-widest text-sm focus:outline-none">
+        <p id="passErr" class="hidden text-xs text-red-500 font-semibold text-center"></p>
+        <button type="submit" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs flex justify-center items-center gap-2">
+          Verify SSO Connection
+        </button>
+      </form>
+      <button onclick="toggleModal('loginModal', false)" class="w-full text-center text-xs text-slate-400 font-semibold inline-block pt-1.5">&#8592; Close Window</button>
+    </div>
+  </div>
+
+  <!-- DRAWER overlay/slide details sheet modal -->
+  <div id="detailDrawer" class="fixed inset-0 z-50 overflow-hidden hidden flex justify-end">
+    <!-- Backdrop overlay click closure -->
+    <div onclick="toggleModal('detailDrawer', false)" class="absolute inset-0 bg-slate-950/50"></div>
+    <!-- Drawer panel slider -->
+    <div class="relative w-full max-w-2xl bg-white h-full shadow-2xl flex flex-col justify-between z-10">
+      <div class="p-6 border-b flex justify-between items-start gap-4">
+        <div>
+          <span class="text-[10px] text-slate-410 tracking-widest uppercase block font-mono">Detailed Case Assessment Page</span>
+          <h3 id="drawerName" class="text-xl font-bold font-display text-slate-900 mt-1">Siti Norhaliza</h3>
+          <span id="drawerTitleSubsidiary" class="text-xs text-slate-500 mt-0.5 block">YES 5G Network Ops</span>
+        </div>
+        <button onclick="toggleModal('detailDrawer', false)" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-1.5 rounded-full">&times;</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 space-y-6 text-sm">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 block uppercase mb-1">Status Switcher</label>
+            <select id="drawerStatusUpdate" class="w-full bg-slate-50 border rounded-lg px-2.5 py-1.5 text-xs font-bold" onchange="updateDrawerStatus()"></select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 block uppercase mb-1">Director Endorsement</label>
+            <select id="drawerApprovalUpdate" class="w-full bg-slate-50 border rounded-lg px-2.5 py-1.5 text-xs font-bold" onchange="updateDrawerApproval()">
+              <option value="Pending">Pending</option>
+              <option value="Yes">Yes (Approved)</option>
+              <option value="No">No (Declined)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider block border-b pb-1">S.T.A.R. Formulated Written Claims</h4>
+          <div class="bg-slate-50 border rounded-xl p-4 space-y-3 text-xs leading-relaxed text-slate-700">
+            <p><strong>Nominator Profile:</strong> <span id="drawerNominatorLine">John (Cross-company)</span></p>
+            <p><strong>Values Shown:</strong> <span id="drawerValuesPills" class="text-amber-800 font-semibold bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[10px]">Hard Work</span></p>
+            <div class="border-t border-slate-200/80 my-2 pt-2"></div>
+            <p><strong>S (Situation):</strong> <span id="drawerCaseTextS">Text...</span></p>
+            <p><strong>T (Task):</strong> <span id="drawerCaseTextT">Text...</span></p>
+            <p><strong>A (Action):</strong> <span id="drawerCaseTextA" class="font-medium text-slate-900 block mt-1">Text...</span></p>
+            <p><strong>R (Result):</strong> <span id="drawerCaseTextR" class="font-bold border-l-2 border-emerald-500 pl-2 block mt-1 bg-emerald-50/50 py-1 rounded">Text...</span></p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-slate-650 block">Checklist Screening Vetting</label>
+          <div id="checklistGroup" class="space-y-1 text-xs">
+            <!-- Filled dynamically -->
+          </div>
+        </div>
+
+        <div class="space-y-2 pb-6">
+          <label class="text-xs font-bold text-slate-650 block">Reviewer Dashboard Notes</label>
+          <textarea id="drawerNotes" rows="3" class="w-full bg-slate-50 border rounded-xl p-3 text-xs focus:outline-none" placeholder="Provide notes..." oninput="updateDrawerNotes()"></textarea>
+        </div>
+      </div>
+
+      <div class="p-6 border-t bg-slate-50 flex gap-2">
+        <button onclick="setNominationAsFinalistDirect()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl">
+          Quick-Shortlist as Finalist
+        </button>
+        <button onclick="toggleModal('detailDrawer', false)" class="border border-slate-300 text-slate-600 bg-white text-xs font-bold px-4 py-2.5 rounded-xl">
+          Dismiss Window
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastBox" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-950 text-white font-semibold text-xs py-3 px-6 rounded-xl shadow-xl border-l-4 border-emerald-500 hidden items-center gap-2">
+    <span id="toastMsg">Action saved</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs border-t border-slate-800 mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="font-semibold text-slate-300">BTRT Awards 2026 Standalone Static Page Mock</p>
+      <p class="mt-1 font-mono text-[10px]">LocalStorage Persistence Enabled • Zero Server Overhead</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
